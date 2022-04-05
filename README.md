@@ -11,4 +11,3 @@ Bellow you will see a preview, as well as a link for this repo and a preview vid
 [Repo Link](https://github.com/luistorano/team-generator)
 
 [Video Link](https://drive.google.com/file/d/12yZKWntJ73uINtPa2VoajxiLY9rJXm_I/view)
-

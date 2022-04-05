@@ -34,7 +34,7 @@ function Questions() {
 
 
 function AllDepartment() {
-    const sql = `SELECT * FROM department`;
+    const sql = `SELECT * FROM Department`;
     Connection.query(sql, (err, rows) => {
         if (err)
             throw err;
@@ -78,7 +78,6 @@ function AllRoles() {
         console.table(rows);
         allQuestions();
     })
-    // allQuestions();
 };
 
 function addDepartment() {
