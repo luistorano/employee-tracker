@@ -3,7 +3,7 @@ const { parse } = require("path/posix");
 const Connection = require("../db/connection");
 const displayData = require("./query");
 
-function allQuestions() {
+function Questions() {
     return inquirer.prompt([
         {
             type: 'checkbox',
@@ -14,11 +14,11 @@ function allQuestions() {
     ])
         .then(({ allQuestions }) => {
             if (allQuestions == 'View all Departments') {
-                viewAllDepartment();
+                AllDepartment();
             } else if (allQuestions == 'View all Employees') {
-                viewAllEmployees();
+                AllEmployees();
             } else if (allQuestions == 'View all Roles') {
-                viewAllRoles();
+                AllRoles();
             } else if (allQuestions == 'Add Department') {
                 addDepartment();
             } else if (allQuestions == 'Add Role') {
@@ -33,18 +33,17 @@ function allQuestions() {
 };
 
 
-function viewAllDepartment() {
+function AllDepartment() {
     const sql = `SELECT * FROM department`;
     Connection.query(sql, (err, rows) => {
         if (err)
             throw err;
         console.table(rows);
-        allQuestions();
+        Questions();
     })
-    // allQuestions();
 };
 
-function viewAllEmployees() {
+function AllEmployees() {
     const sql = `SELECT
     Employee.Employee_ID,
     Employee.First_Name,
@@ -64,7 +63,7 @@ function viewAllEmployees() {
     })
 };
 
-function viewAllRoles() {
+function AllRoles() {
     const sql = `SELECT 
     Role_ID,
     Role_Title, 
@@ -102,7 +101,7 @@ function addDepartment() {
         Connection.query(sql, userAnswer.addDepartment, (err, rows) => {
             if (err) throw err;
             console.log('new department added:)');
-            allQuestions();
+            Questions();
         });
     });
 };
@@ -154,7 +153,7 @@ function addRole() {
         Connection.query(sql, [userAnswer.addRole, parseInt(userAnswer.addRoleSalary), parseInt(userAnswer.addRoleDepartment)], (err, rows) => {
             if (err) throw err;
             console.log('Your role was added:)');
-            allQuestions();
+            Questions();
         });
     });
 };
@@ -231,7 +230,7 @@ function addEmployee() {
         Connection.query(sql, [userAnswer.addEmployeeName, userAnswer.addEmployeeLast, parseInt(userAnswer.addEmployeeTitle), parseInt(userAnswer.addRoleDepartment)], (err, rows) => {
             if (err) throw err;
             console.log('Your employee was added:)');
-            allQuestions();
+            Questions();
         });
     });
 };
@@ -269,10 +268,10 @@ function updateEmployee() {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'updateEmployeeid',
-            message: 'Which employee id would you like to update?',
-            validate: addroleInput => {
-                if (addroleInput) {
+            name: 'updateEmployeeID',
+            message: 'Which employee ID would you like to update?',
+            validate: addRoleInput => {
+                if (addRoleInput) {
                     return true;
                 } else {
                     console.log('Please give a response!');
@@ -294,15 +293,15 @@ function updateEmployee() {
             }
         }
     ]).then(userAnswer => {
-        const sql = `UPDATE employee SET employee_id = ? WHERE role_id = ?`;
-        Connection.query(sql, [parseInt(userAnswer.updateEmployeeid), parseInt(userAnswer.updateEmployeeRole)], (err, rows) => {
+        const sql = `UPDATE Employee SET Employee_ID = ? WHERE Role_ID = ?`;
+        Connection.query(sql, [parseInt(userAnswer.updateEmployeeID), parseInt(userAnswer.updateEmployeeRole)], (err, rows) => {
             if (err) throw err;
             console.log('Your employee was updated:)');
-            allQuestions();
+            Questions();
         });
     });
 };
 
 
 
-module.exports = allQuestions;
+module.exports = Questions;
