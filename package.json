@@ -9,14 +9,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Dapr1nc3/employee-track.git"
+        "url": "git+https://github.com/luistorano/employee-tracker.git"
     },
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Dapr1nc3/employee-track/issues"
+        "url": "https://github.com/luistorano/employee-tracker/issues"
     },
-    "homepage": "https://github.com/Dapr1nc3/employee-track#readme",
+    "homepage": "https://github.com/luistorano/employee-tracker#readme",
     "dependencies": {
         "console.table": "^0.10.0",
         "express": "^4.17.2",
